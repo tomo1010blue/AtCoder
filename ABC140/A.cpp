@@ -31,6 +31,8 @@ template<class T> inline bool chmax(T &a, T b){
 
 int main(void)
 {
-	
+	int n;
+    cin >> n;
+    cout << n * n * n << endl;
     return 0;
 }
