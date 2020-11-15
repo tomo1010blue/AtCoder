@@ -29,39 +29,27 @@ template<class T> inline bool chmax(T &a, T b){
 	return false;
 }
 
-ll a, b, x;
-
-ll k = 1e18;
-
-ll cnt(ll c) {
-    for(int i = 18; ; --i) {
-        if(c / k) {
-            return i+1;
-        }
-        k /= 10;
-    }
-}
-
-bool func(ll c) {
-    ll d = cnt(c);
-    if(c > x / a) return true;
-    if(a * c + b * d > x) return true;
-    else false;
-}
-
 int main(void)
 {
-	cin >> a >> b >> x;
+	ll a, b, x;
+    cin >> a >> b >> x;
     ll l = 0;
-    ll r = LINF;
+    ll r = 1000000001;
+    auto d = [&](ll c) {
+        int res = 0;
+        while(c) {
+            c /= 10;
+            ++res;
+        }
+        return res;
+    };
+    auto f = [&](ll c) {
+        return a * c + b * d(c);
+    };
     while(r - l > 1) {
         ll c = (l + r) / 2;
-        if(func(c)) {
-            r = c;
-        }
-        else {
-            l = c;
-        }
+        if(f(c) <= x) l = c;
+        else r = c;
     }
     cout << l << endl;
     return 0;
