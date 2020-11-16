@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+#include <atcoder/all>
+#define fi first
+#define se second
+#define repl(i, l, r) for (int i = l; i < r; ++i)
+#define rep(i, n) repl(i, 0, n)
+#define pb push_back
+#define eb emplace_back
+#define all(v) (v).begin(),(v).end()
+#define rall(v) (v).rbegin(),(v).rend()
+using namespace std;
+using namespace atcoder;
+using ll = long long;
+using ld = long double;
+using P = pair<int, int>;
+using G = vector<vector<int>>;
+using mint = modint1000000007;
+const int INF = 1001001001;
+const ll LINF = 1001001001001001001;
+const int dy[] = {-1, 0, 1, 0};
+const int dx[] = {0, -1, 0, 1};
+
+template<class T> inline bool chmin(T &a, T b){
+	if(a > b){a = b; return true;}
+	return false;
+}
+template<class T> inline bool chmax(T &a, T b){
+	if(a < b){a = b; return true;}
+	return false;
+}
+
+int main(void)
+{
+    string s;
+    cin >> s;
+    string t = s;
+    reverse(all(t));
+    int ans = 0;
+    int n = s.size();
+    rep(i, (n + 1) / 2) {
+        if(s[i] != t[i]) ++ans;
+    }
+    cout << ans << endl;
+    return 0;
+}
