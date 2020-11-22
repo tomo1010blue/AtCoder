@@ -28,7 +28,32 @@ template<class T> inline bool chmax(T &a, T b){
     return false;
 }
 
+vector<pair<ll, ll>> prime_factorize(ll n) {
+    vector<pair<ll, ll>> res;
+    for(ll a = 2; a * a <= n; ++a) {
+        if(n % a != 0) continue;
+        ll ex = 0;
+        while(n % a == 0) {
+            ++ex;
+            n /= a;
+        }
+        res.pb({a, ex});
+    }
+    if(n != 1) res.pb({n, 1});
+    return res;
+}
+
 int main(void) {
-    
+    int n;
+    cin >> n;
+    int ans = 0;
+    repl(c, 1, n) {
+        int k = n - c;
+        const auto &pf = prime_factorize(k);
+        ll res = 1;
+        for(auto p : pf) res *= p.se + 1;
+        ans += res;
+    }
+    cout << ans << endl;
     return 0;
 }
