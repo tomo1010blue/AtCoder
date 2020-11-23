@@ -28,7 +28,7 @@ template<class T> inline bool chmax(T &a, T b){
     return false;
 }
 
-long double dp[105][105][105];
+ld dp[105][105][105];
 
 int main(void) {
     int a, b, c;
