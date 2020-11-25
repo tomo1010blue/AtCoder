@@ -12,7 +12,7 @@ using namespace std;
 using namespace atcoder;
 using ll = long long;
 using ld = long double;
-using mint = modint1000000007;
+using mint = modint998244353;
 using P = pair<int, int>;
 using G = vector<vector<int>>;
 const int INF = 1001001001;
@@ -29,25 +29,21 @@ template<class T> inline bool chmax(T &a, T b){
 }
 
 int main(void) {
-    int n, t;
-    cin >> n >> t;
-    vector<int> a(n);
-    rep(i, n) cin >> a[i];
-    vector<ll> u, v;
-    u = v = {0};
-    rep(i, n) {
-        for(int j = u.size() - 1; j >= 0; --j) {
-            u.pb(u[j] + a[i]);
+    int n, k;
+    cin >> n >> k;
+    vector<int> l(k), r(k);
+    rep(i, k) cin >> l[i] >> r[i];
+    vector<mint> dp(n+1), dpsum(n+1);
+    dp[1] = 1;
+    repl(i, 1, n+1) {
+        rep(j, k) {
+            if(i - l[j] < 1) continue;
+            int s = i - l[j];
+            int t = max(1, i - r[j]);
+            dp[i] += dpsum[s] - dpsum[t-1];
         }
-        swap(u, v);
+        dpsum[i] = dpsum[i-1] + dp[i];
     }
-    sort(all(u));
-    ll ans = 0;
-    for(ll x : v) {
-        if(x > t) continue;
-        int si = upper_bound(all(u), t - x) - u.begin();
-        chmax(ans, x + u[si-1]);
-    }
-    cout << ans << endl;
+    cout << dp[n].val() << endl;
     return 0;
 }

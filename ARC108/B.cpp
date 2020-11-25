@@ -29,25 +29,22 @@ template<class T> inline bool chmax(T &a, T b){
 }
 
 int main(void) {
-    int n, t;
-    cin >> n >> t;
-    vector<int> a(n);
-    rep(i, n) cin >> a[i];
-    vector<ll> u, v;
-    u = v = {0};
+    int n;
+    cin >> n;
+    string s;
+    cin >> s;
+    stack<char> fox;
     rep(i, n) {
-        for(int j = u.size() - 1; j >= 0; --j) {
-            u.pb(u[j] + a[i]);
+        fox.push(s[i]);
+        if(fox.size() < 3) continue;
+        string t = "";
+        rep(i, 3) {
+            t += fox.top();
+            fox.pop();
         }
-        swap(u, v);
+        if(t == "xof") continue;
+        rep(i, 3) fox.push(t[2-i]);
     }
-    sort(all(u));
-    ll ans = 0;
-    for(ll x : v) {
-        if(x > t) continue;
-        int si = upper_bound(all(u), t - x) - u.begin();
-        chmax(ans, x + u[si-1]);
-    }
-    cout << ans << endl;
+    cout << fox.size() << endl;
     return 0;
 }
