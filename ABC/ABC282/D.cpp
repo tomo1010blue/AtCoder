@@ -29,51 +29,45 @@ template<class T> inline bool chmax(T &a, T b){
 	return false;
 }
 
-vector <int> g[200005];
-int n;
-int color[200005];
-
-bool dfs(int v, int c) {
-	color[v] = c;
-	rep(i, sz(g[v])) {
-		if(color[g[v][i]] == c) return false;
-		if(color[g[v][i]] == 0 && !dfs(g[v][i], -c)) return false;
-	}
-	return true;
+ll c2(ll n) {
+	return n * (n - 1) / 2;
 }
-
-struct UnionFind {
-	vector<int> d;
-	UnionFind(int n=0): d(n,-1) {}
-	int find(int x) {
-		if (d[x] < 0) return x;
-		return d[x] = find(d[x]);
-	}
-	bool unite(int x, int y) {
-		x = find(x); y = find(y);
-		if (x == y) return false;
-		if (d[x] > d[y]) swap(x,y);
-		d[x] += d[y];
-		d[y] = x;
-		return true;
-	}
-	bool same(int x, int y) { return find(x) == find(y);}
-	int size(int x) { return -d[find(x)];}
-};
 
 int main() {
 	ios::sync_with_stdio(false);
 	cin.tie(0);
-	int m;
+	int n, m;
 	cin >> n >> m;
+	G to(n);
 	rep(i, m) {
 		int u, v;
 		cin >> u >> v;
 		--u;
 		--v;
-		g[u].pb(v);
-		g[v].pb(u);
+		to[u].pb(v);
+		to[v].pb(u);
 	}
-
+	vector<int> c(n, -1);
+	vector<int> cvs(2);
+	auto dfs = [&](auto dfs, int v, int nc=0) -> bool {
+    if (c[v] != -1) return c[v] == nc;
+    c[v] = nc;
+    cvs[nc]++;
+    for (int u : to[v]) {
+      if (!dfs(dfs,u,!nc)) return false;
+    }
+    return true;
+  };
+	ll ans = c2(n) - m;
+	rep(i, n) {
+		if(c[i] != -1) continue;
+		cvs = vector<int>(2);
+		if(!dfs(dfs, i)) {
+			cout << 0 << endl;
+			return 0;
+		}
+		for(int s : cvs) ans -= c2(s);
+	}
+	cout << ans << endl;
 	return 0;
 }
