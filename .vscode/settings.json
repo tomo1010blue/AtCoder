@@ -4,5 +4,9 @@
         "string": "cpp",
         "vector": "cpp",
         "iostream": "cpp"
-    }
+    },
+
+    "code-runner.executorMap": {
+        "cpp": "cd $dir && g++ -O0 -std=c++17 -I ~/ac-library $fileName && ./a.out",
+    },
 }
