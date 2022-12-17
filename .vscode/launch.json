@@ -1,0 +1,58 @@
+{
+  "configurations": [
+    
+    {
+      "name": "C/C++: g++ アクティブ ファイルのビルドとデバッグ",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${fileDirname}/${fileBasenameNoExtension}",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${fileDirname}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb",
+      "preLaunchTask": "C/C++: g++ アクティブなファイルのビルド"
+    },
+    {
+      "name": "C/C++: clang++ アクティブ ファイルのビルドとデバッグ",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${fileDirname}/${fileBasenameNoExtension}",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${fileDirname}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb",
+      "preLaunchTask": "C/C++: clang++ アクティブなファイルのビルド"
+    },
+    {
+      "name": "C/C++: cpp アクティブ ファイルのビルドとデバッグ",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${fileDirname}/${fileBasenameNoExtension}",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${fileDirname}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb",
+      "preLaunchTask": "C/C++: cpp アクティブなファイルのビルド"
+    },
+    {
+      "name": "C/C++: gcc アクティブ ファイルのビルドとデバッグ",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${fileDirname}/${fileBasenameNoExtension}",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${fileDirname}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb",
+      "preLaunchTask": "C/C++: gcc アクティブなファイルのビルド"
+    }
+  ],
+  "version": "2.0.0"
+}
