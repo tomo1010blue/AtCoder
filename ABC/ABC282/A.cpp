@@ -32,6 +32,13 @@ template<class T> inline bool chmax(T &a, T b){
 int main() {
 	ios::sync_with_stdio(false);
 	cin.tie(0);
-	
+	int k;
+	cin >> k;
+	string ans;
+	rep(i, k) {
+		char c = (char) (i + 'A');
+		ans.pb(c);
+	}
+	cout << ans << endl;
 	return 0;
 }
