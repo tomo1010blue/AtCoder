@@ -14,7 +14,7 @@ using namespace atcoder;
 using ll = long long;
 using ld = long double;
 using mint = modint1000000007;
-using P = pair<int, int>;
+using P = pair<ll, ll>;
 using G = vector<vector<int>>;
 const int INF = 1001001001;
 const ll LINF = 1001001001001001001;
@@ -34,7 +34,29 @@ int main() {
 	cin.tie(0);
 	int n;
 	cin >> n;
-	int ans = -1;
-	
+	vector<ll> a(n+1);
+	rep(i, n+1) cin >> a[i];
+	vector<P> p(n+1);
+	for(int i = n; i >= 0; --i) {
+		if(i == n) {
+			p[i].fi = a[i];
+			p[i].se = a[i];
+			continue;
+		}
+		p[i].fi = (p[i+1].fi + 1) / 2 + a[i];
+		p[i].se = p[i+1].se + a[i];
+	}
+	if(p[0].fi > 1) {
+		cout << -1 << endl;
+		return 0;
+	}
+	ll ans = 1;
+	vector<ll> v(n+1);
+	v[0] = 1;
+	repl(i, 1, n+1) {
+		v[i] = min(p[i].se, 2*(v[i-1]-a[i-1]));
+		ans += v[i];
+	}
+	cout << ans << endl;
 	return 0;
 }
