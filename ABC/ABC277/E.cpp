@@ -29,9 +29,52 @@ template<class T> inline bool chmax(T &a, T b){
 	return false;
 }
 
+Struct Edge {
+	int to, cost;
+};
+
 int main() {
 	ios::sync_with_stdio(false);
 	cin.tie(0);
-	
+	int n, m, k;
+	cin >> n >> m >> k;
+	vector<vector<Edge>> g(2*n);
+	rep(i, m) {
+		int u, v, a;
+		cin >> u >> v >> a;
+		--u; --v;
+		if(a == 1) {
+			g[u].pb((Edge){v,1});
+			g[v].pb((Edge){u,1});
+		} else {
+			g[n+u].pb((Edge){n+v,1});
+			g[n+v].pb((Edge){n+u,1});
+		}
+	}
+	rep(i, k) {
+		int v;
+		cin >> v;
+		--v;
+		g[v].pb((Edge){n+v,0});
+		g[n+v].pb((Edge){v,0});
+	}
+	vector<int> dist(2*n, INF);
+	deque<P> q;
+	dist[0] = 0;
+	q.emplace_back(0, 0);
+	while(q.size()) {
+		auto [d, v] = q.front(); q.pop_front();
+		if(dist[v] != d) continue;
+		for(Edge e : g[v]) {
+			int nd = d + e.cost;
+			if(nd >= dist[e.to]) continue;
+			dist[e.to] = nd;
+			if(e.cost) q.emplace_back(nd, e.to);
+			else q.emplace_front(nd, e.to);
+		}
+	}
+	int ans = min(dist[n-1], dist[2*n-1]);
+	if(ans == INF) ans = -1;
+	cout << ans << endl;
 	return 0;
 }
