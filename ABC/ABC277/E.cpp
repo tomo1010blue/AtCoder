@@ -29,7 +29,7 @@ template<class T> inline bool chmax(T &a, T b){
 	return false;
 }
 
-Struct Edge {
+struct Edge {
 	int to, cost;
 };
 
