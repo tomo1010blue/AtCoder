@@ -32,23 +32,49 @@ template<class T> inline bool chmax(T &a, T b){
 int main() {
 	ios::sync_with_stdio(false);
 	cin.tie(0);
-	int n, m;
-	cin >> n >> m;
-	map<int, int> mp;
-	rep(i, n) {
-		int a;
-		cin >> a;
-		mp[a]++;
-	}
-	rep(i, m) {
-		int b;
-		cin >> b;
-		if(!mp[b]) {
-			cout << "No" << endl;
-			return 0;
+	int q;
+	cin >> q;
+	multiset<ll> s;
+	while(q--) {
+		int t;
+		cin >> t;
+		if(t == 1) {
+			ll x;
+			cin >> x;
+			s.insert(x);
+		} else if(t == 2) {
+			ll x;
+			int k;
+			cin >> x >> k;
+			auto itr = s.upper_bound(x);
+			ll ans = -1;
+			bool ok = true;
+			rep(i, k) {
+				if(itr == s.begin()) {
+					ok = false;
+					break;
+				}
+				--itr;
+			}
+			if(ok) ans = *itr;
+			cout << ans << endl;
+		} else if(t == 3) {
+			ll x;
+			int k;
+			cin >> x >> k;
+			auto itr = s.lower_bound(x);
+			ll ans = -1;
+			bool ok = true;
+			rep(i, k-1) {
+				if(itr == s.end()) {
+					ok = false;
+					break;
+				}
+				++itr;
+			}
+			if(ok && itr != s.end()) ans = *itr;
+			cout << ans << endl;
 		}
-		mp[b]--;
 	}
-	cout << "Yes" << endl;
 	return 0;
 }
