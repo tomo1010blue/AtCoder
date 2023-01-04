@@ -16,7 +16,8 @@
         "string_view": "cpp",
         "queue": "cpp",
         "stacktrace": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "random": "cpp"
     },
 
     "code-runner.executorMap": {
