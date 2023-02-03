@@ -28,24 +28,21 @@ template<class T> inline bool chmax(T &a, T b){
     return false;
 }
 
+int solve() {
+    int x1, y1, x2, y2;
+    cin >> x1 >> y1 >> x2 >> y2;
+    if(x1 == x2 && y1 == y2) return 0;
+    if(x1+y1 == y2+x2) return 1;
+    if(x1-y1 == x2-y2) return 1;
+    if(abs(x1-x2)+abs(y1-y2) <= 3) return 1;
+    if((x1+y1)%2 == (x2+y2)%2) return 2;
+    if(abs(x1-x2)+abs(y1-y2) <= 6) return 2;
+    if(abs((x1+y1) - (x2+y2)) <= 3) return 2;
+    if(abs((x1-y1) - (x2-y2)) <= 3) return 2;
+    return 3;
+}
+
 int main(void) {
-    ll r1, c1, r2, c2;
-    cin >> r1 >> c1 >> r2 >> c2;
-    ll r3 = r1 + 1;
-    ll r4 = r1 + 2;
-    ll r5 = r1 + 3;
-    ll r6 = r1 - 1;
-    ll r7 = r1 - 2;
-    ll r8 = r1 - 3;
-    if(r1 == r2 && c1 == c2) cout << 0 << endl;
-    else if(abs(r1 - r2) + abs(c1 - c2) <= 3 || r1 + c1 == r2 + c2 || r1 - c1 == r2 - c2) cout << 1 << endl;
-    else if((r2 + r1 + c2 - c1) % 2 == 0 && (r2 - r1 + c2 + c1) % 2 == 0) cout << 2 << endl;
-    else if(r3 + c1 == r2 + c2 || r3 - c1 == r2 - c2) cout << 2 << endl;
-    else if(r4 + c1 == r2 + c2 || r4 - c1 == r2 - c2) cout << 2 << endl;
-    else if(r5 + c1 == r2 + c2 || r5 - c1 == r2 - c2) cout << 2 << endl;
-    else if(r6 + c1 == r2 + c2 || r6 - c1 == r2 - c2) cout << 2 << endl;
-    else if(r7 + c1 == r2 + c2 || r7 - c1 == r2 - c2) cout << 2 << endl;
-    else if(r8 + c1 == r2 + c2 || r8 - c1 == r2 - c2) cout << 2 << endl;
-    else cout << 3 << endl;
+    cout << solve() << endl;
     return 0;
 }
