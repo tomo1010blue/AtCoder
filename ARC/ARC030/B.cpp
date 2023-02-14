@@ -32,6 +32,34 @@ template<class T> inline bool chmax(T &a, T b){
 int main() {
 	ios::sync_with_stdio(false);
 	cin.tie(0);
-	
+	int n, x;
+	cin >> n >> x;
+	--x;
+	vector<int> h(n);
+	rep(i, n) cin >> h[i];
+	G g(n);
+	rep(i, n-1) {
+		int a, b;
+		cin >> a >> b;
+		--a; --b;
+		g[a].pb(b);
+		g[b].pb(a);
+	}
+	vector<bool> used(n);
+	used[x] = true;
+	auto dfs = [&](auto f, int v, int p = -1) -> bool {
+		if(h[v]) used[v] = true;
+		for(auto u : g[v]) {
+			if(u == p) continue;
+			if(!used[v]) used[v] = f(f, u, v);
+			else f(f, u, v);
+		}
+		if(used[v]) return true;
+		return false;
+	};
+	dfs(dfs, x);
+	int ans = -2;
+	rep(i, n) if(used[i]) ans += 2;
+	cout << ans << endl;
 	return 0;
 }
