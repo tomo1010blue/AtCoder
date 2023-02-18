@@ -32,6 +32,20 @@ template<class T> inline bool chmax(T &a, T b){
 int main() {
 	ios::sync_with_stdio(false);
 	cin.tie(0);
-	
+	int n;
+	cin >> n;
+	vector idx(n+1, vector<int>());
+	rep(i, n) {
+		int a;
+		cin >> a;
+		idx[a].pb(i);
+	}
+	int q;
+	cin >> q;
+	while(q--) {
+		int l, r, x;
+		cin >> l >> r >> x;
+		cout << lower_bound(all(idx[x]), r) - lower_bound(all(idx[x]), l - 1) << endl;
+	}
 	return 0;
 }

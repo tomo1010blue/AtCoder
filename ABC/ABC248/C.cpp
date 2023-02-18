@@ -13,7 +13,7 @@ using namespace std;
 using namespace atcoder;
 using ll = long long;
 using ld = long double;
-using mint = modint1000000007;
+using mint = modint998244353;
 using P = pair<int, int>;
 using G = vector<vector<int>>;
 const int INF = 1001001001;
@@ -32,6 +32,13 @@ template<class T> inline bool chmax(T &a, T b){
 int main() {
 	ios::sync_with_stdio(false);
 	cin.tie(0);
-	
+	int n, m, k;
+	cin >> n >> m >> k;
+	vector dp(n+1, vector<mint>(k+1));
+	dp[0][0] = 1;
+	rep(i, n) rep(j, k) repl(l, 1, m+1) if(j+l <= k) dp[i+1][j+l] += dp[i][j];
+	mint ans = 0;
+	rep(i, k) ans += dp.back()[i+1];
+	cout << ans.val() << endl;
 	return 0;
 }
